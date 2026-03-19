@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPI</title>
+</head>
+
+<body>
+  <h1>Лабораторная работа 2. Цикличные алгоритмы</h1>
+  <p><strong>Цель работы:</strong>научиться разрабатывать скрипты на языке Javascript, реализующие циклические алгоритмы
+    обработки данных с использованием for, while, do...while</p>
+  <h2>Задача № 9.2</h2>
+  <h3>Формулировка условия</h3>
+  <p>
+    Даны натуральное число n, действительные числа a, b (a <code><</code> b). Получить r(0), r(1),..,r(n), где r(i) = a
+    + i * h, h = (b-a)/n.
+  </p>
+  <h3>Примеры входных и выходных условий</h3>
+  <input class="inputN" type="number" placeholder="N">
+  <input class="inputA" type="number" placeholder="A">
+  <input class="inputB" type="number" placeholder="B">
+
+  <table border="1">
+    <tr>
+      <th>Тест</th>
+      <th>Входные данные</th>
+      <th>Выходные данные</th>
+    </tr>
+    <tr>
+      <td>Test</td>
+      <td class="input1"></td>
+      <td class="output1"></td>
+    </tr>
+  </table>
+  <button class="btn-script">Запустить скрипт</button>
+  <script>
+    function generateSequence(n, a, b) {
+      n *= 1;
+      a *= 1;
+      b *= 1;
+      if (n < 0 || a >= b) {
+        alert('Некорректные вводные данные: n должно быть натуральным числом и a < b.');
+        return
+      }
+
+      let h = (b - a) / n;
+      let sequence = [];
+
+      for (let i = 0; i <= n; i++) {
+        sequence.push(a + i * h);
+      }
+
+      return sequence;
+    }
+
+
+    let btn = document.querySelector('.btn-script');
+    btn.addEventListener('click', function () {
+      let inputN = document.querySelector('.inputN').value
+      let inputA = document.querySelector('.inputA').value
+      let inputB = document.querySelector('.inputB').value
+      let input1 = document.querySelector('.input1')
+      input1.innerText = ''
+      input1.innerText += 'n = ' + inputN + ',';
+      input1.innerText += 'a = ' + inputA + ',';
+      input1.innerText += ' b = ' + inputB;
+      let output1 = document.querySelector('.output1')
+      output1.innerText = ''
+      output1.innerText = 'Значения r(i) члена ' + generateSequence(inputN,inputA, inputB);
+    });
+  </script>
+</body>
+
+
+</html>

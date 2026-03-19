@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPI</title>
+</head>
+
+<body>
+  <h1>Лабораторная работа 3. Функции. Рекурсивные функции</h1>
+  <p><strong>Цель работы:</strong>научиться разрабатывать скрипты на языке Javascript с использованием функций и
+    рекурсивных функций</p>
+  <h2>Задача № 10.1</h2>
+  <h3>Формулировка условия</h3>
+  <p>
+    Написать и протестировать функцию, вычисляющую расстояние между двумя точками в n-мерном евклидовом пространстве,
+    где 1 <= n <=3. Координаты точек передаются в виде 2n отдельных параметров </p>
+      <h3>Примеры входных и выходных условий</h3>
+      <h3>Одномерное пространство</h3>
+      <input class="inputX" type="number" placeholder="x">
+      <input class="inputY" type="number" placeholder="y">
+      <h3>Двумерное пространство</h3>
+      <input class="inputX1" type="number" placeholder="x1">
+      <input class="inputY1" type="number" placeholder="y1">
+      <input class="inputX2" type="number" placeholder="x2">
+      <input class="inputY2" type="number" placeholder="y2">
+      <h3>Трехмерное пространство</h3>
+      <input class="inputX3" type="number" placeholder="x3">
+      <input class="inputY3" type="number" placeholder="y3">
+      <input class="inputZ3" type="number" placeholder="z3">
+      <input class="inputX4" type="number" placeholder="x4">
+      <input class="inputY4" type="number" placeholder="y4">
+      <input class="inputZ4" type="number" placeholder="z4">
+
+      <table border="1">
+        <tr>
+          <th>Тест</th>
+          <th>Входные данные</th>
+          <th>Выходные данные</th>
+        </tr>
+        <tr>
+          <td>Test</td>
+          <td class="input1"></td>
+          <td class="output1"></td>
+        </tr>
+      </table>
+      <button class="btn-script">Запустить скрипт</button>
+      <script>
+        function calculateDistance(...coordinates) {
+          const n = coordinates.length / 2;
+
+          if (n < 1 || n > 3 || coordinates.length % 2 !== 0) {
+            alert('Количество координат должно соответствовать n-мерному пространству с 1 <= n <= 3');
+            return
+          }
+
+          let distance = 0;
+          for (let i = 0; i < n; i++) {
+            coordinates[i] *= 1;
+            distance += Math.pow(coordinates[i] - coordinates[n + i], 2);
+          }
+          return Math.sqrt(distance);
+        }
+
+        let btn = document.querySelector('.btn-script');
+        btn.addEventListener('click', function () {
+          //ОдноМ
+          let inputX = document.querySelector('.inputX').value
+          let inputY = document.querySelector('.inputY').value
+          //ДвухМ
+          let inputX1 = document.querySelector('.inputX1').value
+          let inputY1 = document.querySelector('.inputY1').value
+          let inputX2 = document.querySelector('.inputX2').value
+          let inputY2 = document.querySelector('.inputY2').value
+          //ТрехМ
+          let inputX3 = document.querySelector('.inputX3').value
+          let inputY3 = document.querySelector('.inputY3').value
+          let inputX4 = document.querySelector('.inputX4').value
+          let inputY4 = document.querySelector('.inputY4').value
+          let inputZ3 = document.querySelector('.inputZ3').value
+          let inputZ4 = document.querySelector('.inputZ4').value
+          let input1 = document.querySelector('.input1')
+          input1.innerText = ''
+          input1.innerText += 'Одномерное пространство \n'
+          input1.innerText += 'x = ' + inputX + ',';
+          input1.innerText += ' y = ' + inputY + '\n';
+          input1.innerText += 'Двумерное пространство \n'
+          input1.innerText += 'x1 = ' + inputX1 + ',';
+          input1.innerText += ' y1 = ' + inputY1 + '\n';
+          input1.innerText += ' x2 = ' + inputX2 + ',';
+          input1.innerText += ' y2 = ' + inputY2 + '\n';
+          input1.innerText += 'Трёхмерное пространство \n'
+          input1.innerText += ' x3 = ' + inputX3 + ',';
+          input1.innerText += ' y3 = ' + inputY3 + ', ';
+          input1.innerText += 'z3 = ' + inputZ3 + '\n ';
+          input1.innerText += ' x4 = ' + inputX4 + ', ';
+          input1.innerText += ' y4 = ' + inputY4 + ', ';
+          input1.innerText += ' z4 = ' + inputZ4;
+          let output1 = document.querySelector('.output1')
+          output1.innerText = ''
+          output1.innerText += 'Расстояние в одномерное пространстве: ' + calculateDistance(inputX, inputY) + '\n'
+          output1.innerText += 'Расстояние в двумерном пространстве: ' + calculateDistance(inputX1, inputY1, inputX2, inputY2) + '\n'
+          output1.innerText += 'Расстояние в трёхмерном пространстве: ' + calculateDistance(inputX3, inputY3, inputZ3, inputX4, inputY4, inputZ4);
+        });
+      </script>
+</body>
+
+</html>

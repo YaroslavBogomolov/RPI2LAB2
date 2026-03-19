@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPI</title>
+  <style>
+    .inputT {
+      width: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторная работа 4. Алгоритмы работы со строками</h1>
+  <p><strong>Цель работы:</strong>научиться разрабатывать скрипты на языке Javascript, реализующие алгоритмы обработки
+    строковых данных с использованием свойств и методов объекта String </p>
+  <h2>Задача № 11.1</h2>
+  <h3>Формулировка условия</h3>
+  <p>
+    Дана строка s, состоящая из слов (последовательностей символов, не содержащих пробелов внутри себя), разделенных
+    между собой одним или несколькими пробелами. Определить, повторяется ли в тексте первое слово
+  </p>
+  <h3>Примеры входных и выходных условий</h3>
+  <input type="text" class="inputT" placeholder="Введите строку">
+  <table border="1">
+    <tr>
+      <th>Тест</th>
+      <th>Входные данные</th>
+      <th>Выходные данные</th>
+    </tr>
+    <tr>
+      <td>Tect1</td>
+      <td class="input1"></td>
+      <td class="output1"></td>
+    </tr>
+  </table>
+  <button class="btn-script">Запустить скрипт</button>
+  <script>
+    function isFirstWordRepeated(s) {
+      // Используем метод trim(), чтобы удалить возможные пробелы
+      // в начале и в конце строки, а также split(), чтобы разделить
+      // строку на массив слов.
+      const words = s.trim().split(/\s+/);
+
+      // Получаем первое слово
+      const firstWord = words[0];
+
+      // Проверяем встречается ли первое слово ещё раз
+      // начиная со второго слова в массиве
+      for (let i = 1; i < words.length; i++) {
+        if (words[i] === firstWord) {
+          return 'Повторяется';
+        }
+      }
+
+      return 'Не повторяется';
+    }
+    let btn = document.querySelector('.btn-script')
+    btn.addEventListener('click', function () {
+      let inputT = document.querySelector('.inputT').value;
+      let input1 = document.querySelector('.input1')
+      input1.innerText = '';
+      input1.innerText = inputT;
+      let output1 = document.querySelector('.output1')
+      output1.innerText = isFirstWordRepeated(inputT)
+    })
+    //// Входные данные
+    //"Собака Соба Кот Собака";
+    //"Яблоко ярый Край Кит";
+  </script>
+</body>
+
+</html>

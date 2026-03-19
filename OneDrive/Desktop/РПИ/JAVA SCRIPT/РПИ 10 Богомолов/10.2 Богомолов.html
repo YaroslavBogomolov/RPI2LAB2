@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPI</title>
+</head>
+
+<body>
+  <h1>Лабораторная работа 3. Функции. Рекурсивные функции</h1>
+  <p><strong>Цель работы:</strong>научиться разрабатывать скрипты на языке Javascript с использованием функций и
+    рекурсивных функций</p>
+  <h2>Задача № 10.2</h2>
+  <h3>Формулировка условия</h3>
+  <p>
+    Функция f(n) для целых неотрицательных n определена следующим образом: f(n) = {n-10, если n > 100; f(f(n+11)), n <=
+      100}. Вычислить f(106), f(99), f(85). Какие вообще значения принимает эта функция? </p>
+      <h3>Примеры входных и выходных условий</h3>
+      <table border="1">
+        <tr>
+          <th>Тест</th>
+          <th>Результат</th>
+        </tr>
+        <tr>
+          <td>Test</td>
+          <td class="output1"></td>
+        </tr>
+      </table>
+      <button class="btn-script">Запустить скрипт</button>
+      <script>
+        function f(n) {
+          n *= 1;
+          if (n > 100) {
+            console.log(n - 10)
+            return n - 10;
+          } else {
+            return f(f(n + 11));
+          }
+        }
+
+        let btn = document.querySelector('.btn-script');
+        btn.addEventListener('click', function () {
+          let output1 = document.querySelector('.output1')
+          output1.innerText = ''
+          output1.innerText += 'f(106) = ' + f(106) + '\n';
+          output1.innerText += 'f(99) = ' + f(99) + '\n';
+          output1.innerText += 'f(85) = ' + f(85);
+        });
+        //Эта функция - "Функция Маккарти 91", 
+        //всегда возвращает значение 91 для всех целых аргументов n в диапазоне от 0 до 100. 
+        //Для значений больше 100 она возвращает n - 10.
+      </script>
+</body>
+
+</html>

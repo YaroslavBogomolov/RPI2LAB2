@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPI</title>
+  <style>
+    table {
+      font-family: Arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .inputN {
+      width: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторная работа 5. Массивы с числовыми индексами</h1>
+  <p><strong>Цель работы:</strong>научиться разрабатывать скрипты на языке Javascript, реализующие алгоритмы обработки
+    одномерных и многомерных (двумерных) числовых массивов</p>
+  <h2>Задача № 12.2</h2>
+  <h3>Формулировка условия</h3>
+  <p>
+    Дана целочисленная квадратная матрица порядка n. Переменной y присвоить значение наибольшего из элементов матрицы,
+    расположенных на главной диагонали и ниже ее.
+  </p>
+  <h3>Примеры входных и выходных условий</h3>
+  <input type="number" class="inputN" placeholder="Введите размерность матрицы N">
+  <table border="1">
+    <tr>
+      <th>Тест</th>
+      <th>Входные данные</th>
+      <th>Выходные данные</th>
+    </tr>
+    <tr>
+      <td>Tect1</td>
+      <td class="input1"></td>
+      <td class="output1"></td>
+    </tr>
+  </table>
+  <button class="btn-script">Запустить скрипт</button>
+  <script>
+    function maxElementBelowMainDiagonal(matrix) {
+      for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+          matrix[i][j] *= 1;
+        }
+      }
+      let y = Number.NEGATIVE_INFINITY; 
+
+      for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+          // Проверяем, находится ли элемент на главной диагонали или ниже ее
+          if (i >= j && matrix[i][j] > y) {
+            y = matrix[i][j]; // Обновляем y, если нашли больший элемент
+          }
+        }
+      }
+      console.log(y)
+      return y; // Возвращаем наибольший элемент
+    }
+
+    function generateSquareMatrix(m) {
+      m *= 1;
+      let matrix = [];
+      let sign = 1
+      for (let i = 0; i < m; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < m; j++) {
+          matrix[i][j] = Math.floor(Math.random() * 100 * sign);
+        }
+      }
+
+      return matrix;
+    }
+    let btn = document.querySelector('.btn-script')
+    btn.addEventListener('click', function () {
+      let inputN = document.querySelector('.inputN').value;
+      let input1 = document.querySelector('.input1')
+      input1.innerText = '';
+      input1.innerText += 'Размерность матрицы: ' + inputN + ' \n';
+      input1.innerText += ' Значения матрицы: \n'
+      let matrix = generateSquareMatrix(inputN);
+      for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix.length; j++) {
+          if (j == matrix.length - 1) {
+            input1.innerText += matrix[i][j] + ', \n'
+          }
+          else {
+            input1.innerText += matrix[i][j] + ', '
+          }
+
+        }
+      }
+      let output1 = document.querySelector('.output1')
+      output1.innerText = ''
+      let res = maxElementBelowMainDiagonal(matrix);
+      output1.innerText += 'y = '+ res;
+    })
+  </script>
+</body>
+
+</html>
