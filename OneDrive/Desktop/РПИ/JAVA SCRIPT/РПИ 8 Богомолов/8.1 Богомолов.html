@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPI</title>
+</head>
+
+<body>
+  <h1>Лабораторная работа 1. Линейные алгоритмы. Ветвление</h1>
+  <p><strong>Цель работы:</strong>научиться разрабатывать скрипты на языке Javascript, реализующие линейные и
+    развлетленные алгоритмы обработки данных</p>
+  <h2>Задача № 8.1</h2>
+  <h3>Формулировка условия</h3>
+  <p>
+    Вычислить площадь кольца, внутренний и внешний диаметры которого равны соответственно d1 и d2 .
+  </p>
+  <h3>Примеры входных и выходных условий</h3>
+  <input class="inputD1" type="number" placeholder="d1">
+  <input class="inputD2" type="number" placeholder="d2">
+
+  <table border="1">
+    <tr>
+      <th>Тест</th>
+      <th>Входные данные</th>
+      <th>Выходные данные</th>
+    </tr>
+    <tr>
+      <td>Test</td>
+      <td class="input1"></td>
+      <td class="output1"></td>
+    </tr>
+  </table>
+  <button class="btn-script">Запустить скрипт</button>
+  <script>
+    function calculateRingArea(d1, d2) {
+      d1 *= 1;
+      d2 *= 1;
+      if (d1 < 0 || d2 < 0 || d1 > d2) {
+        alert("Некорректные диаметры: внутренний диаметр должен быть меньше внешнего и оба положительные.");
+        return
+      }
+
+      const radius1 = d1 / 2;
+      const radius2 = d2 / 2;
+
+      const pi = Math.PI;
+      const area1 = pi * Math.pow(radius1, 2);
+      const area2 = pi * Math.pow(radius2, 2);
+
+      return area2 - area1;
+    }
+
+    let btn = document.querySelector('.btn-script');
+    btn.addEventListener('click', function () {
+      let inputD1 = document.querySelector('.inputD1').value
+      let inputD2 = document.querySelector('.inputD2').value
+      let input1 = document.querySelector('.input1')
+      input1.innerText = ''
+      input1.innerText += 'd1 = ' + inputD1 + ',';
+      input1.innerText += ' d2 = ' + inputD2;
+      let output1 = document.querySelector('.output1')
+      output1.innerText = ''
+      output1.innerText = 'Площадь: ' + calculateRingArea(inputD1, inputD2).toFixed(2)
+    });
+  </script>
+</body>
+
+</html>

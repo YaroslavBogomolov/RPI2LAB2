@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPI</title>
+</head>
+
+<body>
+  <h1>Лабораторная работа 1. Линейные алгоритмы. Ветвление</h1>
+  <p><strong>Цель работы:</strong>научиться разрабатывать скрипты на языке Javascript, реализующие линейные и
+    развлетленные алгоритмы обработки данных</p>
+  <h2>Задача № 8.2</h2>
+  <h3>Формулировка условия:</h3>
+  <p>
+    Вычислить, если это возможно, значение выражения: (x + y) / (x - 3) * (y + 5), где x и y - действительные числа.
+  </p>
+  <h3>Примеры входных и выходных условий</h3>
+  <input class="inputX" type="number" placeholder="x">
+  <input class="inputY" type="number" placeholder="y">
+
+  <table border="1">
+    <tr>
+      <th>Тест</th>
+      <th>Входные данные</th>
+      <th>Выходные данные</th>
+    </tr>
+    <tr>
+      <td>Test</td>
+      <td class="input1"></td>
+      <td class="output1"></td>
+    </tr>
+  </table>
+  <button class="btn-script">Запустить скрипт</button>
+  <script>
+    function calculateExpression(x, y) {
+      x *= 1;
+      y *= 1;
+      if (x - 3 === 0) {
+        alert("Деление на ноль невозможно (x - 3 не может быть равным 0).");
+        return
+      }
+
+      return (x + y) / (x - 3) * (y + 5);
+    }
+
+    let btn = document.querySelector('.btn-script');
+    btn.addEventListener('click', function () {
+      let inputX = document.querySelector('.inputX').value
+      let inputY = document.querySelector('.inputY').value
+      let input1 = document.querySelector('.input1')
+      input1.innerText = ''
+      input1.innerText += 'X = ' + inputX + ',';
+      input1.innerText += ' Y = ' + inputY;
+      let output1 = document.querySelector('.output1')
+      output1.innerText = ''
+      output1.innerText = 'Значение: ' + calculateExpression(inputX, inputY).toFixed(4)
+    });
+  </script>
+</body>
+
+</html>

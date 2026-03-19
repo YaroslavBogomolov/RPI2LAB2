@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPI</title>
+</head>
+
+<body>
+  <h1>Лабораторная работа 6. Объекты как ассоциативные массивы</h1>
+  <p><strong>Цель работы:</strong>научиться разрабатывать скрипты на языке Javascript, реализующие алгоритмы обработки
+    строковых данных с использованием свойств и методов объекта String </p>
+  <h2>Задача № 13.1</h2>
+  <h3>Формулировка условия</h3>
+  <p>
+    Дан ассоциативный массив, содержащий сведения о клиентах банка: фамилия, имя, отчество клиента, номер его счета и
+    сумма вклада на этом счете. Найти всех клиентов, имеющих несколько счетов, и вычислить общую сумму вкладов каждого
+    из них.
+  </p>
+  <h3>Примеры входных и выходных условий</h3>
+  <form id="client-form">
+    <label for="surname">Фамилия:</label>
+    <input type="text" id="surname" required>
+    <label for="name">Имя:</label>
+    <input type="text" id="name" required>
+    <label for="patronymic">Отчество:</label>
+    <input type="text" id="patronymic" required>
+    <label for="accountNumber">Номер счета:</label>
+    <input type="number" id="accountNumber" required>
+    <label for="amount">Сумма вклада:</label>
+    <input type="number" id="amount" step="0.01" required>
+    <button type="button" onclick="addClient()">Добавить клиента</button>
+  </form>
+
+  <br>
+
+  <h3>Существующие клиенты</h3>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ФИО клиента</th>
+        <th>Номер счета</th>
+        <th>Сумма вклада</th>
+      </tr>
+    </thead>
+    <tbody id="client-table-body">
+    </tbody>
+  </table>
+
+  <br>
+  <button type="button" onclick="findClientsWithMultipleAccounts()">Найти клиентов с несколькими счетами</button>
+
+  <h3>Клиенты, у которых несколько счетов</h3>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Тест</th>
+        <th>Входные данные</th>
+        <th>Выходные данные</th>
+      </tr>
+    </thead>
+    <tbody id="test-table-body">
+    </tbody>
+  </table>
+
+  <script>
+    var clients = {};
+
+    function findClientsWithMultipleAccounts() {
+      var multiAccountClients = {};
+      // Вычислить общую сумму вкладов каждого клиента с несколькими счетами
+      for (var clientKey in clients) {
+        var accounts = clients[clientKey];
+        if (accounts.length > 1) {
+          var total = accounts.reduce((sum, account) => sum + account.amount, 0);
+          multiAccountClients[clientKey] = total;
+        }
+      }
+      // Обновить тестовые таблицы
+      updateTestTables(multiAccountClients);
+    }
+
+    function addClient() {
+      var surname = document.getElementById("surname").value;
+      var name = document.getElementById("name").value;
+      var patronymic = document.getElementById("patronymic").value;
+      var accountNumber = document.getElementById("accountNumber").value;
+      var amount = parseFloat(document.getElementById("amount").value);
+      var clientKey = surname + ' ' + name + ' ' + patronymic;
+
+      if (!clients[clientKey]) {
+        clients[clientKey] = [];
+      }
+
+      clients[clientKey].push({ accountNumber: accountNumber, amount: amount });
+
+      document.getElementById("client-form").reset(); // Сбросить форму
+      updateClientTable(); // Обновить таблицу клиентов
+      //findClientsWithMultipleAccounts(); // Обновить выходные данные
+    }
+
+    function updateClientTable() {
+      var table = document.getElementById("client-table-body");
+      table.innerHTML = "";
+      for (var clientKey in clients) {
+        var row = table.insertRow(-1);
+        row.insertCell(0).textContent = clientKey;
+        row.insertCell(1).textContent = clients[clientKey].map(a => a.accountNumber).join(", ");
+        row.insertCell(2).textContent = clients[clientKey].reduce((sum, a) => sum + a.amount, 0).toFixed(2);
+      }
+    }
+
+    function updateTestTables(multiAccountClients) {
+      var table = document.getElementById("test-table-body");
+      table.innerHTML = ""; // Очищаем содержимое таблицы для новых данных
+      // Заполнить тестовыми данными
+      for (var clientKey in multiAccountClients) {
+        var row = table.insertRow(); // Вставляем новую строку
+        row.insertCell(0).textContent = "Тест";
+        row.insertCell(1).textContent = clientKey; // ФИО клиента
+        row.insertCell(2).textContent = multiAccountClients[clientKey].toFixed(2); // Общая сумма вкладов
+      }
+    }
+  </script>
+</body>
+
+</html>
