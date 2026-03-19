@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPI</title>
+  <style>
+    table {
+      font-family: Arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .inputT {
+      width: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторная работа 5. Массивы с числовыми индексами</h1>
+  <p><strong>Цель работы:</strong>научиться разрабатывать скрипты на языке Javascript, реализующие алгоритмы обработки
+    одномерных и многомерных (двумерных) числовых массивов</p>
+  <h2>Задача № 12.1</h2>
+  <h3>Формулировка условия</h3>
+  <p>
+    Дан одномерный числовой массив, все элементы которого различны. Заменить в нем четные элементы, расположенные после
+    максимального, их квадратами, а нечетные элементы, расположенные после максимального — их кубами.
+  </p>
+  <h3>Примеры входных и выходных условий</h3>
+  <input type="text" class="inputT" placeholder="Введите массив через запятую">
+  <table border="1">
+    <tr>
+      <th>Тест</th>
+      <th>Входные данные</th>
+      <th>Выходные данные</th>
+    </tr>
+    <tr>
+      <td>Tect1</td>
+      <td class="input1"></td>
+      <td class="output1"></td>
+    </tr>
+  </table>
+  <button class="btn-script">Запустить скрипт</button>
+  <script>
+    function replaceElementsAfterMax(arr) {
+
+      for (let i = 0; i < arr.length; i++) {
+        arr[i] *= 1;
+      }
+      // Найдем индекс максимального элемента в массиве
+      const maxIndex = arr.findIndex((element, index, array) => element === Math.max(...array));
+
+      // Заменим элементы после максимального в соответствии с условиями задачи
+      for (let i = maxIndex + 1; i < arr.length; i++) {
+        if (arr[i] % 2 === 0) { // Проверка на четность
+          arr[i] = arr[i] ** 2;  // Возвести в квадрат если четное
+        } else {
+          arr[i] = arr[i] ** 3;  // Возвести в куб если нечетное
+        }
+      }
+
+      return arr; // Возвращаем модифицированный массив
+    }
+    let btn = document.querySelector('.btn-script')
+    btn.addEventListener('click', function () {
+      let inputT = document.querySelector('.inputT').value;
+      let input1 = document.querySelector('.input1')
+      let arrSplit = inputT.split(',')
+      console.log(arrSplit)
+      input1.innerText = '';
+      input1.innerText += inputT;
+      let output1 = document.querySelector('.output1')
+      output1.innerText = ''
+      output1.innerText = 'Значение матрицы: \n'
+      let matrix = replaceElementsAfterMax(arrSplit)
+      output1.innerText = matrix;
+    })
+    //3, 1, 4, 5, 9, 2, 6, 8, 7
+  </script>
+</body>
+
+</html>

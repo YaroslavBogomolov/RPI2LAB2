@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPI</title>
+</head>
+
+<body>
+  <h1>Лабораторная работа 2. Цикличные алгоритмы</h1>
+  <p><strong>Цель работы:</strong>научиться разрабатывать скрипты на языке Javascript, реализующие циклические алгоритмы
+    обработки данных с использованием for, while, do...while</p>
+  <h2>Задача № 9.1</h2>
+  <h3>Формулировка условия</h3>
+  <p>
+    Пусть x(0) = 1, x(k) = ((2 - (x(k-1))^3) / 7). Найти первый член x(n), для которого abs(x(n) - x(n - 1) < 10^-5)
+      </p>
+      <h3>Примеры входных и выходных условий</h3>
+      <table border="1">
+        <tr>
+          <th>Тест</th>
+          <th>Результат</th>
+        </tr>
+        <tr>
+          <td>Test</td>
+          <td class="output1"></td>
+        </tr>
+      </table>
+      <button class="btn-script">Запустить скрипт</button>
+      <script>
+        function findFirstElement() {
+          let xPrev = 1; // x(0)
+          let xCurr;
+          let k = 0;
+
+          do {
+            xCurr = (2 - Math.pow(xPrev, 3)) / 7;
+            k++;
+            if (Math.abs(xCurr - xPrev) < 1e-5) {
+              break;
+            }
+            xPrev = xCurr;
+          } while (true);
+
+          return { position: k, value: xCurr };
+        }
+
+        let btn = document.querySelector('.btn-script');
+        btn.addEventListener('click', function () {
+          let input1 = document.querySelector('.input1')
+          const epsilon = '10^-5';
+          const result = findFirstElement();
+          console.log(result.value)
+          let output1 = document.querySelector('.output1')
+          output1.innerText = ''
+          output1.innerText = `Первый член x(${result.position}), удовлетворяющий условию |x(n) - x(n-1)| < ${epsilon} равен : ${result.value.toFixed(6)}`;
+        });
+      </script>
+
+</body>
+
+</html>
